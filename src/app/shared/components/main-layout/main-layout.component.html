@@ -1,0 +1,28 @@
+<div class="w-100" id="hdr" style="background-color: #e3f2fd;">
+  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-1 mb-2 border-bottom">
+    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+      <img src="http://localhost:5000/Images/disLogo.png" class="rounded float-start mx-2" height="50px;" width="50px;">
+      <span class="navbar-brand mb-0 mx-2 h1">Discord community</span>
+    </a>
+
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+      <li><a href="/" class="nav-link px-2 link-dark"><strong>Home</strong></a></li>
+      <li><a [routerLink]="['/info']" class="nav-link px-2 link-dark"><strong>Info</strong></a></li>
+    </ul>
+
+    <div class="col-md-3 text-end">
+      <button *ngIf="userRole == 'admin' || userRole == null" type="button" class="btn btn-outline-primary me-2"
+              [routerLink]="['/admin/dashboard']">{{userName}}</button>
+      <button *ngIf="userRole == 'user' || userRole == 'moder'" type="button" class="btn btn-outline-primary me-2"
+              [routerLink]="['/admin/user/dashboard']">{{userName}}</button>
+      <button type="button" class="btn btn-primary mx-2" [routerLink]="['/admin/signup']">Sign-up</button>
+    </div>
+  </header>
+</div>
+
+<div class="container">
+  <app-alert></app-alert>
+  <router-outlet></router-outlet>
+</div>
+
+<app-footer></app-footer>

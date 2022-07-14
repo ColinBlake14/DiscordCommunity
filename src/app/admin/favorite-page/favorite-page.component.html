@@ -1,0 +1,16 @@
+<div class="dashbg text-center">
+  <div
+    *ngIf="serverNamedList  as servers; else loading"
+    class="dservers"
+  >
+
+    <app-disc *ngFor="let server of servers"
+              [server]="server"
+    ></app-disc>
+
+  </div>
+
+  <ng-template #loading>
+    <p class="text-center">У вас пока нет избранных серверов</p>
+  </ng-template>
+</div>

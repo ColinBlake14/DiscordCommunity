@@ -1,0 +1,30 @@
+<div class="bgdiv bg-light m-auto">
+<form class="was-validated" [formGroup]="form" (ngSubmit)="submit()">
+  <h3 class="text-center">Вход в личный кабинет</h3>
+  <hr>
+  <br>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email адрес:</label>
+    <input type="email" class="form-control is-invalid" id="email" placeholder="Введите Email"
+           formControlName="email" required
+    >
+    <div
+      *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
+      class="invalid-feedback">
+      Введите корректный email адрес!
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Пароль:</label>
+    <input type="password" class="form-control is-invalid" id="password" placeholder="Введите пароль"
+           formControlName="password" required
+    >
+    <div
+      *ngIf="form.get('password')?.touched && form.get('password')?.invalid"
+      class="invalid-feedback">
+      Минимальное количество символов для пароля - 6
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Войти</button>
+</form>
+</div>

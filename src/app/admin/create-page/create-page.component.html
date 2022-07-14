@@ -1,0 +1,59 @@
+<div class="bgdiv bg-light m-auto">
+<form class="was-validated" [formGroup]="form" (ngSubmit)="submit()">
+  <h3 class="text-center">Добавить discord-сервер</h3>
+  <hr>
+  <br>
+  <div class="mb-3">
+    <label for="title" class="form-label">Название сервера:</label>
+    <input type="text" class="form-control is-invalid" id="title" placeholder="Введите название сервера"
+           formControlName="title" required
+           [ngClass]="{invalid: form.get('title')?.touched && form.get('title')?.invalid}"
+    >
+    <div
+      *ngIf="form.get('title')?.touched && form.get('title')?.invalid"
+      class="invalid-feedback">
+      Минимальное количество символов - 3
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="UI" class="form-label">Уникальный идентификатор сервера:</label>
+    <input type="text" class="form-control is-invalid" id="UI" placeholder="Введите уникальный идентификатор сервера"
+           formControlName="UI" required
+           [ngClass]="{invalid: form.get('UI')?.touched && form.get('UI')?.invalid}"
+    >
+    <div
+      *ngIf="form.get('UI')?.touched && form.get('UI')?.invalid"
+      class="invalid-feedback">
+      Минимальное количество символов - 15
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <select class="form-select" formControlName="game" required>
+      <option value="">Выберите игру</option>
+      <option *ngFor="let dataItem of topicList" value="{{dataItem.TopicName}}">{{dataItem.TopicName}}</option>
+    </select>
+    <div class="invalid-feedback">Необходимо выбрать игру</div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Описание сервера:</label>
+    <quill-editor formControlName="text"></quill-editor>
+  </div>
+
+  <div class="mb-3">
+    <label for="url" class="form-label">Ссылка для вступления:</label>
+    <input type="text" class="form-control is-invalid" id="url" placeholder="Ссылка-приглашение"
+           formControlName="url" required
+           [ngClass]="{invalid: form.get('url')?.touched && form.get('url')?.invalid}"
+    >
+    <div
+      *ngIf="form.get('url')?.touched && form.get('url')?.invalid"
+      class="invalid-feedback">
+      Данное поле обязательно для заполнения
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Сохранить</button>
+</form>
+</div>

@@ -1,0 +1,39 @@
+<div class="dashbg bg-light">
+<div *ngIf="topicsData.length; else loading">
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="inputGroup-sizing-default">Поиск</span>
+    <input type="text" class="form-control" aria-describedby="inputGroup-sizing-default"
+           placeholder="Найти категорию..." [(ngModel)]="searchStr"
+    >
+  </div>
+  <table class="table table-hover text-center">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Название</th>
+      <th scope="col">Файл</th>
+      <th scope="col">Действие</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let top of topicsData | searchTopics: searchStr, let idx = index">
+      <th scope="row">{{ idx + 1}}</th>
+      <td>{{ top.TopicName }}</td>
+      <td>{{ top.TopicImage }}</td>
+      <td>
+        <button class="btn btn-outline-primary me-md-2"
+                (click)="toTopic(top.TopicId)"
+        >Изменить</button>
+        <button type="button" class="btn btn-outline-danger"
+                (click)="remove(top.TopicId)"
+        >Удалить</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+<ng-template #loading>
+  <p class="text-center">Идет загрузка...</p>
+</ng-template>

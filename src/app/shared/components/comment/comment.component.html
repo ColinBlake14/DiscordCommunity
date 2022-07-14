@@ -1,0 +1,46 @@
+<div *ngIf="isLike; then like else dislike">
+</div>
+
+<ng-template #like>
+  <div  class="card text-white bg-success mb-3" style="max-width: 600px;">
+    <div class="card-header text-center">{{comment.CommentUserName}}</div>
+    <div class="card-body">
+      <h5 class="card-title">Like!</h5>
+      <p class="card-text">{{comment.CommentText}}</p>
+    </div>
+    <div class="card-footer text-white">
+      <div class="row g-0 text-center">
+        <div class="col">
+          <em class="card-text">Дата: {{comDate| date:'short'}}</em>
+        </div>
+        <div class="col text-end">
+          <button type="button" class="btn btn-warning btn-sm"
+                  (click)="report()"
+          >Report</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #dislike>
+  <div  class="card text-white bg-danger mb-3" style="max-width: 600px;">
+    <div class="card-header text-center">{{comment.CommentUserName}}</div>
+    <div class="card-body">
+      <h5 class="card-title">Dislike.</h5>
+      <p class="card-text">{{comment.CommentText}}</p>
+    </div>
+    <div class="card-footer text-white">
+      <div class="row g-0 text-center">
+        <div class="col">
+          <em class="card-text">Дата: {{comDate| date:'short'}}</em>
+        </div>
+        <div class="col text-end">
+          <button type="button" class="btn btn-warning btn-sm"
+                  (click)="report()"
+          >Report</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,26 @@
+<div *ngIf="userName" class="bgdiv bg-light m-auto">
+  <form class="was-validated" [formGroup]="form" (ngSubmit)="submit()">
+    <h5 class="text-center">Оставить комментарий</h5>
+    <hr>
+    <div class="mb-3">
+      <textarea class="form-control is-invalid" id="comment" placeholder="Ваше мнение о сервере"
+             formControlName="comment" required rows="3"
+             [ngClass]="{invalid: form.get('comment')?.touched && form.get('comment')?.invalid}"
+      ></textarea>
+      <div
+        *ngIf="form.get('comment')?.touched && form.get('comment')?.invalid"
+        class="invalid-feedback">
+        Минимальное количество символов - 10
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <select class="form-select" formControlName="like" required>
+        <option value=1>Сервер понравился</option>
+        <option value=0>Сервер не понравился</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Сохранить</button>
+  </form>
+</div>

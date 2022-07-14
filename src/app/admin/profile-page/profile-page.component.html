@@ -1,0 +1,87 @@
+<div class="bgdiv bg-light m-auto">
+  <form class="was-validated" [formGroup]="form" (ngSubmit)="submit()" *ngIf="form">
+    <h3 class="text-center">Личные данные пользователя</h3>
+    <hr>
+
+    <div class="mb-3 text-center">
+      <label class="form-label">Роль: {{curData[0].UserRole}}</label>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email адрес:</label>
+      <input type="email" class="form-control is-invalid" id="email" placeholder="Введите Email"
+             formControlName="email" required
+      >
+      <div
+        *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
+        class="invalid-feedback">
+        Введите корректный email адрес!
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="name" class="form-label">Имя пользователя:</label>
+      <input type="text" class="form-control is-invalid" id="name" placeholder="Введите имя пользователя"
+             formControlName="name" required
+      >
+      <div
+        *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+        class="invalid-feedback">
+        Введите корректное имя пользователя!
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Пароль:</label>
+      <input type="text" class="form-control is-invalid" id="password" placeholder="Введите пароль"
+             formControlName="password" required
+      >
+      <div
+        *ngIf="form.get('password')?.touched && form.get('password')?.invalid"
+        class="invalid-feedback">
+        Минимальное количество символов для пароля - 6
+      </div>
+    </div>
+
+    <label class="form-label">Предпочитаемые жанры: </label>
+
+    <div class="mb-3 d-inline-flex">
+      <button *ngFor="let list of namedGenreList" class="alert-primary m-1 alert">{{list.genreName}}
+        <button (click)="delete(list.tgId)" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </button>
+    </div>
+
+    <div class="mb-3">
+      <label for="genre" class="form-label">Добавить жанр:</label>
+      <div class="row">
+
+        <div class="col-sm-8">
+          <select class="form-select" formControlName="genre" id="genre" required>
+            <option value="">Выберите жанр</option>
+            <option *ngFor="let dataItem of genreList" value="{{dataItem.GenreId}}">{{dataItem.GenreName}}</option>
+          </select>
+        </div>
+
+        <div class="col-sm-4">
+          <button type="button" class="btn btn-outline-success" (click)="addGenre($event)">Добавить</button>
+        </div>
+
+      </div>
+      <div class="invalid-feedback">Необходимо выбрать жанр</div>
+
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col">
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Изменить</button>
+      </div>
+
+      <div class="col">
+        <button type="submit" class="btn btn-outline-primary" (click)="back($event)">Вернуться</button>
+      </div>
+    </div>
+
+  </form>
+</div>

@@ -1,0 +1,33 @@
+<div class="bgdiv bg-light m-auto">
+<form class="was-validated" [formGroup]="form" (ngSubmit)="submit()">
+  <h3 class="text-center">Добавить категорию</h3>
+  <hr>
+  <br>
+  <div class="mb-3">
+    <label for="name" class="form-label">Название категории:</label>
+    <input type="text" class="form-control is-invalid" id="name" placeholder="Введите название сервера"
+           formControlName="name" required
+           [ngClass]="{invalid: form.get('name')?.touched && form.get('name')?.invalid}"
+    >
+    <div
+      *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+      class="invalid-feedback">
+      Минимальное количество символов - 3
+    </div>
+  </div>
+
+  <div class="container mb-3 text-center">
+    <img class="img-thumbnail" [src]=PhotoFilePath height="250px;" width="200px;">
+  </div>
+
+  <div class="input-group mb-3">
+
+    <input type="file" (change)="uploadImage({event : $event})" class="form-control"
+           id="inputGroupFile" formControlName="image" required
+    >
+    <label class="input-group-text" for="inputGroupFile">Upload</label>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Создать</button>
+</form>
+</div>

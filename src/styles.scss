@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~quill/dist/quill.core.css";
+@import "~quill/dist/quill.snow.css";
+
+body, html {
+  height: 100%;
+}
+
+.bgdiv {
+  max-width: 600px;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.dashbg {
+  height: 100%;
+  margin-top: 10px;
+  outline: 3px solid dodgerblue;
+}
+
+.container {
+  position: center;
+}
+
+body {
+  background: url(./assets/Images/disBG.png);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}

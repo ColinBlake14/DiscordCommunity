@@ -1,0 +1,55 @@
+<div class="dashbg bg-light text-center">
+  <div *ngIf="dServersData.length; else loading">
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="inputGroup-sizing-default">Поиск</span>
+      <input type="text" class="form-control" aria-describedby="inputGroup-sizing-default"
+             placeholder="Найти сервер..." [(ngModel)]="searchStr"
+      >
+      <button class="btn btn-outline-secondary me-md-2"
+              (click)="sort()"
+      >Сортировать по статусу</button>
+    </div>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Название</th>
+        <th scope="col">Автор</th>
+        <th scope="col">Игра</th>
+        <th scope="col">Дата</th>
+        <th scope="col">Статус</th>
+        <th scope="col">Действие</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let serv of dServersData | searchServers: searchStr, let idx = index">
+        <th scope="row">{{ idx + 1}}</th>
+        <td>{{ serv.DServerName }}</td>
+        <td>{{ serv.DServerAuthor }}</td>
+        <td>{{ serv.DServerGame }}</td>
+        <td>{{ serv.DServerDate | date:'medium':undefined:'ru' }}</td>
+        <td>{{ serv.DServerStatus }}</td>
+        <td>
+          <button *ngIf="serv.DServerStatus != 'Active'" type="button" class="btn btn-outline-success me-md-2"
+                  (click)="reestablish(serv.DServerId)"
+          >Восстановить</button>
+          <button class="btn btn-outline-primary me-md-2"
+                  (click)="toDisc(serv.DServerId)"
+          >Изменить</button>
+          <button type="button" class="btn btn-outline-danger"
+                  (click)="remove(serv.DServerId)"
+          >Удалить</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="card">
+    <div class="card-body">
+      Вы еще не добавили ни одного сервера
+    </div>
+  </div>
+</ng-template>

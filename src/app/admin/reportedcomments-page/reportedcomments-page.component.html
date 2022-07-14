@@ -1,0 +1,31 @@
+<div class="dashbg bg-light">
+  <div *ngIf="commentsData.length; else loading">
+    <table class="table table-hover text-center">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Комментарий, на которые поступили жалобы</th>
+        <th scope="col">Действие</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let com of commentsData, let idx = index">
+        <th scope="row">{{ idx + 1}}</th>
+        <td>{{ com.CommentText }}</td>
+        <td>
+          <button class="btn btn-outline-primary me-md-2"
+                  (click)="reestablish(com.CommentId)"
+          >Восстановить</button>
+          <button type="button" class="btn btn-outline-danger"
+                  (click)="delete(com.CommentId)"
+          >Удалить</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p class="text-center">Идет загрузка...</p>
+</ng-template>

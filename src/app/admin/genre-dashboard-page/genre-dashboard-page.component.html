@@ -1,0 +1,49 @@
+<div class="dashbg bg-light">
+  <div >
+    <div class="bgdiv bg-light m-auto">
+    <form class="was-validated" [formGroup]="form" (ngSubmit)="submit()">
+      <h3 class="text-center">Добавить жанр</h3>
+      <hr>
+      <div class="mb-3">
+        <input type="text" class="form-control is-invalid" id="name" placeholder="Введите название жанра"
+               formControlName="name" required
+               [ngClass]="{invalid: form.get('name')?.touched && form.get('name')?.invalid}"
+        >
+        <div
+          *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+          class="invalid-feedback">
+          Минимальное количество символов - 3
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Создать</button>
+    </form>
+    </div>
+    <br>
+    <hr>
+
+    <table *ngIf="genresData.length; else loading" class="table table-hover text-center">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Название</th>
+        <th scope="col">Действие</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let gen of genresData, let idx = index">
+        <th scope="row">{{ idx + 1}}</th>
+        <td>{{ gen.GenreName }}</td>
+        <td>
+          <button type="button" class="btn btn-outline-danger"
+                  (click)="remove(gen.GenreId)"
+          >Удалить</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p class="text-center">Идет загрузка...</p>
+</ng-template>

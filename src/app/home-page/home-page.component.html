@@ -1,0 +1,75 @@
+<div
+  *ngIf="dServersFull  as servers; else loading"
+  class="dservers"
+>
+
+  <div class="row">
+
+    <div class="col-sm-3">
+      <div class="input-group mb-2">
+        <span class="input-group-text">Жанр</span>
+        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-default"
+               placeholder="Battle Royale..." [(ngModel)]="searchStr3" ngDefaultControl
+        >
+      </div>
+
+      <div class="bgdiv bg-gradient m-auto">
+        <div class="input-group mb-3" id="ingr">
+          <div class="d-grid gap-2 col-6 mx-auto">
+            <button *ngFor="let genre of genresData" class="btn btn-info btnlist"
+                    style="background-color: #acd3ff;" (click)="srchGen(genre.GenreName)"
+                    >
+              {{genre.GenreName}}
+            </button>
+
+            <button class="btn btn-secondary btnlist" style="margin-top: 15px"
+                     (click)="sortDServersByOnline()"
+            >
+              Сортировка по онлайну
+            </button>
+            <button class="btn btn-secondary btnlist" style="margin-top: 15px"
+                    (click)="sortDServersByLikes()"
+            >
+              Сортировка по лайкам
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-sm-9">
+      <div class="row g-1 text-center">
+        <div class="col">
+          <div class="input-group mb-2">
+            <span class="input-group-text">Название</span>
+            <input type="text" class="form-control" aria-describedby="inputGroup-sizing-default"
+                   placeholder="Найти сервер..." [(ngModel)]="searchStr" ngDefaultControl
+            >
+          </div>
+        </div>
+        <div class="col">
+          <div class="input-group mb-2">
+            <span class="input-group-text">Категория</span>
+            <input type="text" class="form-control" aria-describedby="inputGroup-sizing-default"
+                   placeholder="World of Warcraft..." [(ngModel)]="searchStr2" ngDefaultControl
+            >
+          </div>
+        </div>
+      </div>
+
+      <app-disc [ngModel]="searchStr" ngDefaultControl
+                *ngFor="let server of servers | searchDServers: searchStr | searchDTopics: searchStr2 | searchGenre: searchStr3"
+                [server]="server"
+      ></app-disc>
+    </div>
+
+  </div>
+
+
+
+</div>
+
+<ng-template #loading>
+  <p class="text-center">Идет загрузка серверов...</p>
+</ng-template>

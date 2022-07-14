@@ -1,0 +1,36 @@
+<app-alert></app-alert>
+
+<ul class="nav nav-tabs bg-light justify-content-center" id="myTab" role="tablist">
+  <li *ngIf="auth.isAuthenticatedUser()" class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab"
+            aria-controls="home" aria-selected="true" [routerLink]="['/admin/user', 'dashboard']">Ваши сервера</button>
+  </li>
+  <li *ngIf="auth.isAuthenticatedUser()" class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab"
+            aria-controls="profile" aria-selected="false" [routerLink]="['/admin/user', 'create']">Добавить сервер</button>
+  </li>
+  <li *ngIf="auth.isAuthenticatedUser()" class="nav-item" role="presentation">
+    <button class="nav-link" id="favorite" data-bs-toggle="tab" data-bs-target="#favorite" type="button" role="tab"
+            aria-controls="favorite" aria-selected="false" [routerLink]="['/admin/user', 'favorite']">Избранное</button>
+  </li>
+  <li *ngIf="auth.isAuthenticatedUser()" class="nav-item" role="presentation">
+    <button class="nav-link" id="recomendation" data-bs-toggle="tab" data-bs-target="#recomendation" type="button" role="tab"
+            aria-controls="recomendation" aria-selected="false" [routerLink]="['/admin/user', 'recomendation']">Рекомендованные сервера</button>
+  </li>
+  <li *ngIf="auth.isAuthenticatedModer()" class="nav-item" role="presentation">
+    <button class="nav-link" id="dashb" data-bs-toggle="tab" data-bs-target="#dashb" type="button" role="tab"
+            aria-controls="dashb" aria-selected="false" [routerLink]="['/admin/user', 'moderdashb']">Список серверов</button>
+  </li>
+  <li *ngIf="auth.isAuthenticatedModer()" class="nav-item" role="presentation">
+    <button class="nav-link" id="comments" data-bs-toggle="tab" data-bs-target="#comments" type="button" role="tab"
+            aria-controls="comments" aria-selected="false" [routerLink]="['/admin/user', 'rcomments']">Комментарии</button>
+  </li>
+  <div class="btn-group float-end" role="group">
+    <a routerLink="/" class="btn btn-primary stretched-link">Главная</a>
+    <button type="button" class="btn btn-danger" href="#" (click)="logout($event)">Выйти</button>
+  </div>
+</ul>
+
+<div class="container center">
+  <router-outlet></router-outlet>
+</div>

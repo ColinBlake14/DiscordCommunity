@@ -1,0 +1,54 @@
+<div *ngIf="userName" class="w-100" id="hdr" style="background-color: #e3f2fd;">
+  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-1 border-bottom">
+    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+      <img src="http://localhost:5000/Images/disLogo.png" class="rounded float-start mx-2" height="50px;" width="50px;">
+      <span class="navbar-brand mb-0 mx-2 h1">Discord community</span>
+    </a>
+
+    <h5>Добро пожаловать, {{userName}}!</h5>
+
+    <div class="col-md-3 text-end">
+      <button type="button" class="btn btn-outline-success mx-2" [routerLink]="['/admin/profile']">Личные данные</button>
+    </div>
+  </header>
+</div>
+
+<app-alert></app-alert>
+
+<ul *ngIf="auth.isAuthenticated()" class="nav nav-tabs bg-light justify-content-center" id="myTab" role="tablist">
+  <li *ngIf="auth.isAuthenticated()" class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab"
+            aria-controls="home" aria-selected="true" [routerLink]="['/admin', 'dashboard']">Список серверов</button>
+  </li>
+  <li *ngIf="auth.isAuthenticated()" class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab"
+            aria-controls="profile" aria-selected="false" [routerLink]="['/admin', 'create']">Добавить сервер</button>
+  </li>
+  <li *ngIf="auth.isAuthenticated()" class="nav-item" role="presentation">
+    <button class="nav-link" id="topic-dash-tab" data-bs-toggle="tab" data-bs-target="#topic-dash" type="button" role="tab"
+            aria-controls="topic-dash" aria-selected="false" [routerLink]="['/admin', 'topic-dashboard']">Список категорий</button>
+  </li>
+  <li *ngIf="auth.isAuthenticated()" class="nav-item" role="presentation">
+    <button class="nav-link" id="topic-create-tab" data-bs-toggle="tab" data-bs-target="#topic-create" type="button" role="tab"
+            aria-controls="topic-create" aria-selected="false" [routerLink]="['/admin', 'create-topic']">Добавить категорию</button>
+  </li>
+  <li *ngIf="auth.isAuthenticated()" class="nav-item" role="presentation">
+    <button class="nav-link" id="genre-dash-tab" data-bs-toggle="tab" data-bs-target="#genre-dash" type="button" role="tab"
+            aria-controls="genre-dash" aria-selected="false" [routerLink]="['/admin', 'genre-dashboard']">Список жанров</button>
+  </li>
+  <li *ngIf="auth.isAuthenticated()" class="nav-item" role="presentation">
+    <button class="nav-link" id="rcomments-tab" data-bs-toggle="tab" data-bs-target="#rcomments-tab" type="button" role="tab"
+            aria-controls="rcomments-tab" aria-selected="false" [routerLink]="['/admin', 'rcomments']">Комментарии</button>
+  </li>
+  <div class="btn-group float-end" role="group">
+    <a routerLink="/" class="btn btn-primary stretched-link">Главная</a>
+    <button type="button" class="btn btn-danger" href="#" (click)="logout($event)">Выйти</button>
+  </div>
+</ul>
+
+<div class="container center">
+  <router-outlet></router-outlet>
+</div>
+
+
+

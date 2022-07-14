@@ -1,0 +1,109 @@
+<div *ngIf="server as serv; else loading ">
+  <div class="card text-center">
+
+    <div class="card-header">
+      <div class="row g-0 text-center">
+        <div class="col">
+          <div class="text-start">
+            <button *ngFor="let list of namedGenreList" class="btn btn-outline-primary btn-sm mx-1">{{list.genreName}}</button>
+          </div>
+        </div>
+        <div class="col">
+          {{ serv.DServerGame }}
+        </div>
+        <div class="col">
+          <div class="col text-end">
+            <button type="button" class="btn btn-warning btn-sm"
+                    (click)="report(serv.DServerId)"
+            >Report</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="serv.DServerStatus != 'Deleted'; else deleted " class="card-body">
+      <div class="row">
+        <div class="col imgcl">
+          <img src="{{ imageFilePath }}" class="rounded-start img-thumbnail" alt="..." height="250px;" width="200px;">
+        </div>
+        <div class="col">
+          <div class="row g-0 text-center">
+            <div class="col text-start">
+              <div *ngIf="userName">
+                <button *ngIf="!isFavor" type="button" class="btn btn-outline-danger btn-sm"
+                        (click)="toFavorite(serv.DServerId)"
+                >Добавить в избранное</button>
+                <button *ngIf="isFavor" type="button" class="btn btn-outline-danger btn-sm"
+                        (click)="deliteFavorite()"
+                >Удалить из избранного</button>
+              </div>
+            </div>
+            <div class="col">
+              <h5 class="card-title">{{ serv.DServerName }}</h5>
+            </div>
+            <div class="col">
+              <p><em class="text card-text p-2">В избранном у <strong style="color: red">
+                {{ favorCount }}</strong> пользователей</em></p>
+            </div>
+          </div>
+          <p class="card-text">
+            <quill-view-html [content] = "serv.DServerText"></quill-view-html>
+          </p>
+          <div class="row g-0 text-center">
+            <div class="col">
+              <p><em class="text card-text p-2">Online: <strong style="color: green">{{ serv.DServerOnline }}</strong></em></p>
+            </div>
+            <div class="col">
+              <a href="{{ serv.DServerURL }}" class="btn btn btn-outline-success"> Ссылка для вступления</a>
+            </div>
+            <div class="col">
+              <p><em class="text card-text p-2">Статус: <strong>{{ serv.DServerStatus }}</strong></em></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer text-muted">
+      <div class="row g-0 text-center">
+        <div class="col">
+          <small class="text-muted card-text p-2">UPD: {{ serv.DServerDate| date:'medium':undefined:'ru' }}</small>
+        </div>
+        <div class="col">
+          <a routerLink="/" class="btn btn-outline-primary btn-sm">На главную</a>
+        </div>
+        <div class="col">
+          <small class="text-muted card-text p-2">Автор: {{ serv.DServerAuthor }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="server as serv; else loading " class="container">
+  <app-create-comment *ngIf="serv.DServerStatus != 'Deleted'"></app-create-comment>
+  <div
+    *ngIf="dComments as comments; else loading"
+    class="comments"
+  >
+    <app-comment
+      *ngFor="let comment of comments"
+      [comment]="comment"
+    ></app-comment>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p class="text-center">Идет загрузка комментариев...</p>
+</ng-template>
+
+<ng-template #deleted>
+  <div *ngIf="server as serv; else loading " class="card text-white bg-danger" style="opacity: 80%;">
+    <div class="card-header">Простите, но сервер больше не доступен</div>
+    <div class="card-body">
+      <h5 class="card-title">{{ serv.DServerName }} был удален на данном сайте</h5>
+      <em class="card-text">Не расстраивайтесь, сервер, возможно, скоро вернется.
+        Если сервер находился у Вас в избранном, то он там и останется.</em>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,57 @@
+<div class="card mb-1 mt-1">
+
+  <div class="card-header pt-1 p-0">
+    <div class="row g-0 text-center">
+      <div class="col imgcl">
+
+      </div>
+      <div class="col">
+        <div class="text-start">
+          <button *ngFor="let list of namedGenreList" class="btn btn-outline-primary btn-sm mx-1">{{list.genreName}}</button>
+        </div>
+      </div>
+      <div class="col">
+        <p><em class="text card-text p-2">Online:
+          <strong *ngIf="server.DServerOnline == 'No data'" style="color: red">{{server.DServerOnline}}</strong>
+          <strong *ngIf="server.DServerOnline != 'No data'" style="color: green">{{server.DServerOnline}}</strong>
+        </em></p>
+      </div>
+      <div class="col">
+        <div class="col text-end">
+          <p><em class="text card-text p-2">В избранном <strong style="color: red">
+            {{favorCount}}</strong></em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-0">
+    <div class="col imgcl">
+      <img src="{{ imageFilePath }}" class="img-fluid rounded-start img-thumbnail" alt="..." height="250px;" width="100px;">
+    </div>
+    <div class="col">
+      <div class="card-body">
+
+        <h5 class="card-title text-center">{{ server.DServerName }}</h5>
+        <p class="card-text text-center">Сервер посвящен игре
+          <strong>{{ server.DServerGame }}</strong>
+          . Для подробной информации перейдите на страницу сервера
+        </p>
+
+        <div class="row g-0 text-center">
+          <div class="col">
+            <small class="text-muted card-text p-2">Updated: {{ server.DServerDate| date:'short':undefined:'ru' }}</small>
+          </div>
+          <div class="col">
+            <a [routerLink]="['/disc', server.DServerId]" class="btn btn-outline-success btn-sm">Открыть страницу сервера</a>
+          </div>
+          <div class="col">
+            <small class="text-muted card-text p-2">Автор: {{ server.DServerAuthor }}</small>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
